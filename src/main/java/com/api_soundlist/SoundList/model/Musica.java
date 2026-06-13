@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class musica {
+public class Musica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
