@@ -37,4 +37,15 @@ public class GlobalHandleException {
                 LocalDateTime.now()
         ));
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponseDto> handleException(Exception ex){
+        Map<String, String> errors = new HashMap<>();
+        errors.put("mensagem", "Ocorreu um erro inesperado no servidor.");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ExceptionResponseDto(
+                "500",
+                errors,
+                LocalDateTime.now()
+        ));
+    }
 }

@@ -5,5 +5,5 @@ public record MusicaResponseDto(Long id,
                                 String artist,
                                 String genre,
                                 Integer duration,
-                                Playlist playlist) {
+                                Long playlistId) {
 }

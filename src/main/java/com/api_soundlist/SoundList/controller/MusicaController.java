@@ -10,21 +10,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
-@RequestMapping("/musicas")
+@RequestMapping("/musics")
 public class MusicaController {
 
     @Autowired
     private MusicaService musicaService;
 
     @GetMapping
-    public ResponseEntity<Page<MusicaResponseDto>> findAll(@PageableDefault(size = 10, sort = "nome", direction = Sort.Direction.ASC)
+    public ResponseEntity<Page<MusicaResponseDto>> findAll(@PageableDefault(size = 10, sort = "title", direction = Sort.Direction.ASC)
                                                                Pageable pageable) {
         return ResponseEntity.ok(musicaService.findAll(pageable));
     }
@@ -36,14 +32,7 @@ public class MusicaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody MusicaRequestDto musicaRequestDto, BindingResult result) {
-        if (result.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            for (var error : result.getFieldErrors()) {
-                errors.put(error.getField(), error.getDefaultMessage());
-            }
-            return ResponseEntity.badRequest().body(errors);
-        }
+    public ResponseEntity<MusicaResponseDto> save(@Valid @RequestBody MusicaRequestDto musicaRequestDto) {
         var MusicaCreate = musicaService.save(musicaRequestDto);
         return ResponseEntity.ok(MusicaCreate);
     }

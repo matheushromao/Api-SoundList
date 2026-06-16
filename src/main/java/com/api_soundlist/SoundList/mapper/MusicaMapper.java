@@ -22,7 +22,7 @@ public class MusicaMapper {
                 musica.getArtist(),
                 musica.getGenre(),
                 musica.getDuration(),
-                musica.getPlaylist()
+                musica.getPlaylist() != null ? musica.getPlaylist().getId() : null
         );
     }
 }

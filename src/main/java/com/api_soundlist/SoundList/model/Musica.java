@@ -21,9 +21,9 @@ public class Musica {
     private String artist;
     @Column(length = 100)
     private String genre;
-    @Column(length = 100)
+    @Column(nullable = false)
     private Integer duration;
-    @ManyToOne
-    @JoinColumn(name = "playlist_id")
+    @ManyToOne(fetch =  FetchType.LAZY, optional = false)
+    @JoinColumn(name = "playlist_id", nullable = false)
     private Playlist playlist;
 }
